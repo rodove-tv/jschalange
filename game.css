@@ -1,96 +1,70 @@
 * {
   margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+}
+
+/* ----- colors variables ----- */
+
+:root {
+  --delft-blue: #2b3a67ff;
+  --paynes-gray: #496a81ff;
+  --french-gray: #bcbdc0ff;
+  --cal-poly-green: #26532bff;
+  --shamrock-green: #399e5aff;
+  --white: #ffffff;
 }
 
 body {
+  background-image: url("./img/TreeWithMoreApples.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
   height: 100vh;
-  display: grid;
-  grid-template-rows: 10% 85% 5%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.page_header {
-  grid-row: 1;
-  background-color: #333;
-  color: white;
+.score {
+  font-size: bold;
+  color: var(--delft-blue);
+}
+
+.Game-score {
+  background-color: var(--white);
   padding: 10px;
+  height: 5vmin;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--delft-blue);
 }
 
-nav {
+.wraper {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--delft-blue);
+  height: 70vmin;
+  width: 65vmin;
+}
+
+#game-board {
+  display: grid;
+  grid-template-columns: repeat(20, 1fr);
+  grid-template-rows: repeat(20, 1fr);
   height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 100%;
+  background-color: var(--white);
+  filter: opacity(50%);
 }
 
-a {
-  text-decoration: none;
-  color: white;
+.snake {
+  background-color: var(--cal-poly-green);
+  margin: 0;
+  height: 100%;
+  width: 100%;
 }
 
-main {
-  grid-row: 2;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #ffffff;
-  color: #000000;
-  padding: 10px;
-  position: relative;
+.food {
+  background-image: url("./img/apple.png");
+  background-size: cover;
+  filter: opacity(100%);
 }
-
-.page_footer {
-  grid-row: 3;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #333;
-  color: white;
-  padding: 10px;
-}
-
-#fullscreenIcon {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  font-size: 10px;
-  cursor: pointer;
-}
-
-remove_full_screen {
-  display: flex;
-}
-
-
-
-
-
-
-
-
-/* Styles de base pour la grille et les cellules */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(3, 100px);
-  gap: 5px;
-}
-
-.cell {
-  width: 100px;
-  height: 100px;
-  border: 1px solid black;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 24px;
-}
-
-/* Styles pour le message */
-#message {
-  margin-top: 20px;
-  font-size: 20px;
-  font-weight: bold;
-}
-
-
