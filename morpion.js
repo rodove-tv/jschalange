@@ -1,14 +1,15 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const game = document.getElementById('game');
+    const game = document.getElementById('wraper');
+    game.classList.add('game_TicTacToe')
 
     // Créer la grille de jeu
     const grid = document.createElement('div');
-    grid.classList.add('grid');
+    grid.classList.add('grid_TicTacToe');
     game.appendChild(grid);
 
     // Créer le message
     const message = document.createElement('div');
-    message.id = 'message';
+    message.id = 'message_TicTacToe';
     game.appendChild(message);
 
     let currentPlayer = 'X'; // Joueur en cours
@@ -17,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
     for (let i = 0; i < 3; i++) {
         for (let j = 0; j < 3; j++) {
             const cell = document.createElement('div');
-            cell.classList.add('cell');
+            cell.classList.add('cell_TicTacToe');
             cell.dataset.row = i;
             cell.dataset.col = j;
             cell.addEventListener('click', handleCellClick);
@@ -44,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Vérifier s'il y a un gagnant
     function checkWin() {
-        const cells = document.querySelectorAll('.cell');
+        const cells = document.querySelectorAll('.cell_TicTacToe');
         const winningCombos = [
             [0, 1, 2], [3, 4, 5], [6, 7, 8], // lignes
             [0, 3, 6], [1, 4, 7], [2, 5, 8], // colonnes
@@ -60,7 +61,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Vérifier s'il y a un match nul
     function checkDraw() {
-        const cells = document.querySelectorAll('.cell');
+        const cells = document.querySelectorAll('.cell_TicTacToe');
         return Array.from(cells).every(cell => cell.textContent);
     }
 });
