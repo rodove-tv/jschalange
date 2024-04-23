@@ -1,0 +1,14 @@
+{
+  "name": "chalange-js",
+  "version": "1.0.0",
+  "description": "create a game",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Corentin - Enzo",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
