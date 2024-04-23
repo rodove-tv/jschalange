@@ -14,7 +14,7 @@
 }
 
 body {
-  background-image: url("./img/TreeWithMoreApples.jpg");
+  background-image: url("/img/TreeWithMoreApples.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   height: 100vh;
@@ -74,12 +74,15 @@ body {
 .game_TicTacToe{
   align-items: center;
   justify-content: center;
+  color: #bcbdc0ff;
+  background-color: rgba(57, 158, 91, 0.465);
 }
 
 
 .grid_TicTacToe {
   display: grid;
   grid-template-columns: repeat(3, 100px);
+  
   gap: 5px;
 }
 
@@ -91,6 +94,7 @@ body {
   justify-content: center;
   align-items: center;
   font-size: 24px;
+  background-color: rgba(57, 158, 91);
 }
 
 /* Styles pour le message */
@@ -98,4 +102,5 @@ body {
   margin-top: 20px;
   font-size: 20px;
   font-weight: bold;
+  background-color: #26532bff;
 }

@@ -1,4 +1,19 @@
-const fullscreenIcon = document.getElementById("fullscreenIcon");
+// Récupérer le paramètre "file" de l'URL
+const urlParams = new URLSearchParams(window.location.search);
+const fileName = urlParams.get('file');
+console.log(fileName);
+// Créer un élément script pour charger le fichier JavaScript correspondant
+if (fileName && fileName !== 'null') {
+  const scriptElement = document.createElement('script');
+  scriptElement.src = `/js/${fileName}.js`;
+  document.body.appendChild(scriptElement);
+}else{
+  console.log('no file');
+  // Redirection vers la page d'erreur
+  window.location.href = '/error';
+}
+
+/*const fullscreenIcon = document.getElementById("fullscreenIcon");
 const game = document.getElementById("game");
 const page_header = document.querySelector(".page_header");
 const page_footer = document.querySelector(".page_footer");
@@ -24,15 +39,4 @@ function toggleFullscreen() {
     game.classList.remove("fullscreen");
     document.exitFullscreen();
   }
-}
-/*// Get the current URL
-const url = new URL(window.location.href);
-
-// Use URLSearchParams to retrieve the value of a parameter
-const paramValue = url.searchParams.get('parameter-name');
-import otherFile from paramValue+'.js';
-function add_game() {
-// Import the other JavaScript file
-// This line retrieves the information from the other JavaScript file
-const infoFromOtherFile = otherFile.someInformation;
 }*/

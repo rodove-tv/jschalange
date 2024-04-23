@@ -1,21 +1,22 @@
-const http = require('http');
-const fs = require('fs');
+const express = require('express');
 const path = require('path');
+const app = express();
 
-const server = http.createServer((req, res) => {
-  fs.readFile(path.join(__dirname, 'game.html'), (err, data) => {
-    if (err) {
-      res.writeHead(500);
-      res.end('Erreur de serveur');
-      return;
-    }
-    res.writeHead(200, {'Content-Type': 'text/html'});
-    res.end(data);
-  });
+// Middleware pour servir les fichiers statiques
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
+app.get('/game', (req, res) => {
+  res.sendFile(path.join(__dirname, 'game.html'));
+});
+app.get('/error', (req, res) => {
+  res.sendFile(path.join(__dirname, 'error.html'));
 });
 
 const PORT = 5555;
 
-server.listen(PORT, () => {
+app.listen(PORT, () => {
   console.log(`Serveur en écoute sur le port http://localhost:${PORT}`);
 });
