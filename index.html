@@ -1,13 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/styles/game.css">
-    <title>Home</title>
-</head>
-<body>
-    <a href="/game?file=morpion"><img src="/img/TreeWithMoreApples.jpg" alt="image du jeux"/>morpion</a>
-    <a href="/game?file=snake"><img src="/img/TreeWithMoreApples.jpg" alt="image du jeux"/>snake</a>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/index.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Index</title>
+  </head>
+  <body>
+    <main id="LayoutContainer">
+      <nav>
+        <img src="/img/OnlineGames.png" class="SiteName"></img>
+        <div class="searchInputWrapper">
+            <input class="searchInput" type="text" placeholder='focus here to search'>
+                <i class="searchInputIcon fa fa-search"></i>
+            </input>
+        </div>
+        <div class="MenuContainer">
+          <button onclick="menuDisplay" class="droptbtn">Menu</button>
+          <div id="menu" class="dropdown-content">
+            <a href="#">Home</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+            <a href="#">Account</a>
+          </div>
+        </div>
+      </nav>
+
+      <section id="MiddleSection">
+        <div id="jeu1" class="GameDiv">jeu 1</div>
+        <div id="jeu2" class="GameDiv">jeu 2</div>
+        <div id="jeu3" class="GameDiv">jeu 3</div>
+      </section>
+
+      <footer>
+        <div id="left">
+          <a href="#">Contact</a>
+        </div>
+        <div id="right">
+          <button>left</button>
+          <button>right</button>
+        </div>
+      </footer>
+    </main>
+  </body>
 </html>
