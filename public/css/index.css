@@ -1,3 +1,6 @@
+/* @import url("https://unpkg.com/open-props");
+@import url("https://unpkg.com/open-props/normalize.min.css"); */
+
 :root {
   --light-grey: #b1b0b2;
   --grey: #83838d;
@@ -9,9 +12,22 @@
   margin: 0;
   padding: 0;
   outline: none;
+  box-sizing: border-box;
+  user-select: none;
+}
+
+::-webkit-scrollbar-track {
+  background: fixed var(--black);
+}
+
+a,
+button,
+input {
+  cursor: url("../img/minimal-ow-pack-pointer.png"), pointer;
 }
 
 body {
+  cursor: url("../img/minimal-ow-pack.png"), auto;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -67,6 +83,7 @@ nav {
   border-radius: 2rem;
   border: none;
   transition: transform 0.1s ease-in-out;
+  box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.3);
 }
 
 ::placeholder {
@@ -102,34 +119,104 @@ nav {
   display: none;
 }
 
-#MiddleSection {
-  height: 65%;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  align-items: flex-end;
-}
-
-.GameDiv {
-  width: 250px;
-  background-color: var(--light-grey);
-  display: flex;
-  border-collapse: collapse;
-  justify-content: center;
-  border-radius: 14px;
-}
+/* ----- each game divs color ----- */
 
 #jeu1 {
-  height: 200px;
+  height: 250px;
+  background-color: rgb(54, 146, 54, 0.8);
+  box-shadow: 0px 0px 10px rgb(54, 146, 54, 0.8),
+    rgba(190, 190, 190, 0.35) 0px 30px 60px -12px inset,
+    rgba(255, 255, 255, 0.4) 0px 18px 36px -18px inset;
+  &:hover {
+    background-color: rgb(54, 146, 54, 0.8);
+    box-shadow: 0px 0px 20px rgb(54, 146, 54, 0.9),
+      rgba(190, 190, 190, 0.35) 0px 30px 65px -12px inset,
+      rgba(255, 255, 255, 0.4) 0px 18px 35px -18px inset;
+  }
 }
 
 #jeu2 {
-  height: 150px;
+  height: 290px;
+  background-color: rgb(160, 28, 28, 0.8);
+  box-shadow: 0px 0px 10px rgb(160, 28, 28, 0.8),
+    rgba(190, 190, 190, 0.35) 0px 30px 60px -12px inset,
+    rgba(255, 255, 255, 0.4) 0px 18px 36px -18px inset;
+  &:hover {
+    background-color: rgb(160, 28, 28, 0.8);
+    box-shadow: 0px 0px 20px rgb(160, 28, 28, 0.9),
+      rgba(190, 190, 190, 0.35) 0px 30px 65px -12px inset,
+      rgba(255, 255, 255, 0.4) 0px 18px 35px -18px inset;
+  }
 }
 
 #jeu3 {
-  height: 220px;
+  height: 275px;
+  background-color: rgb(39, 39, 165, 0.8);
+  box-shadow: 0px 0px 10px rgb(39, 39, 165, 0.8),
+    rgba(190, 190, 190, 0.35) 0px 30px 60px -12px inset,
+    rgba(255, 255, 255, 0.4) 0px 18px 36px -18px inset;
+  &:hover {
+    background-color: rgb(39, 39, 165, 0.8);
+    box-shadow: 0px 0px 20px rgb(39, 39, 165, 0.9),
+      rgba(190, 190, 190, 0.35) 0px 30px 65px -12px inset,
+      rgba(255, 255, 255, 0.4) 0px 18px 35px -18px inset;
+  }
+}
+
+/* ----- game divs style ----- */
+
+#MiddleSection {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  scroll-snap-align: start;
+}
+
+.wrapper {
+  height: 65%;
+  width: 100%;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 100%;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scroll-snap-type: inline mandatory;
+}
+
+.GameDiv {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  width: 600px;
+  margin: 50px;
+  border-radius: 50px;
+  max-width: 90%;
+  max-height: 90%;
+  position: relative;
+}
+
+.imgGame {
+  transition: all 0.6s;
+  position: absolute;
+  left: 50%;
+  top: 0%;
+  transform: translate(-50%, -57%);
+
+  width: 20rem;
+  height: 20rem;
+  filter: drop-shadow(10px 0px 10px rgba(0, 0, 0, 0.5));
+}
+
+.GameBtn {
+  position: absolute;
+  bottom: 10px;
+  background-color: var(--white);
+  box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.3);
+  border: none;
+  border-radius: 20px;
+  padding: 10px 20px;
+  font-size: 1.2rem;
 }
 
 footer {
@@ -142,10 +229,54 @@ footer {
   align-items: center;
 }
 
+.SkipBtn {
+  background: none;
+  border: none;
+  color: var(--black);
+  margin-right: 10px;
+}
+
+.FooterText {
+  font-size: 1.2rem;
+  color: var(--black);
+  font-family: "Pacifico", regular;
+}
+
+/* ----- general style ----- */
+
 #left {
-  margin-left: 15px;
+  margin-bottom: 3.2rem;
+  width: 50%;
+  padding: 2rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 #right {
-  margin-right: 15px;
+  margin-bottom: 3.2rem;
+  width: 50%;
+  padding: 2rem;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.hoverstyle {
+  transition: transform 0.6s, box-shadow 0.6s;
+  &:hover {
+    transform: scale(1.1);
+  }
+  &:hover > .imgGame {
+    height: 23rem;
+    width: 23rem;
+    filter: drop-shadow(15px 0px 15px rgba(0, 0, 0, 0.5));
+  }
+}
+
+.textstyle {
+  margin-bottom: 4rem;
+  font-size: 1.5rem;
+  color: var(--black);
+  font-family: "Pacifico", cursive;
 }

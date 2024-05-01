@@ -4,17 +4,28 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="css/index.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Pacifico"
+      rel="stylesheet"
+    />
+
     <title>Index</title>
   </head>
   <body>
     <main id="LayoutContainer">
-      <nav>
-        <img src="/img/OnlineGames.png" class="SiteName"></img>
+      <nav id="nav">
+        <img src="/img/OnlineGames.png" class="SiteName" />
         <div class="searchInputWrapper">
-            <input class="searchInput" type="text" placeholder='focus here to search'>
-                <i class="searchInputIcon fa fa-search"></i>
-            </input>
+          <input
+            class="searchInput"
+            type="text"
+            placeholder="focus here to search"
+          />
+          <i class="searchInputIcon fa fa-search"></i>
         </div>
         <div class="MenuContainer">
           <button onclick="menuDisplay" class="droptbtn">Menu</button>
@@ -26,22 +37,71 @@
           </div>
         </div>
       </nav>
+      <div class="wrapper">
+        <section id="MiddleSection">
+          <div id="jeu2" class="GameDiv hoverstyle">
+            <img class="imgGame" src="/img/tictactoe.png" alt="tictactoe" />
+            <span class="textstyle">Tic Tac Toe</span>
+            <button class="GameBtn">Play</button>
+          </div>
+          <div id="jeu1" class="GameDiv hoverstyle">
+            <img class="imgGame" src="/img/snake.png" alt="Snake" />
+            <span class="textstyle">Snake</span>
+            <button class="GameBtn">Play</button>
+          </div>
 
-      <section id="MiddleSection">
-        <div id="jeu1" class="GameDiv">jeu 1</div>
-        <div id="jeu2" class="GameDiv">jeu 2</div>
-        <div id="jeu3" class="GameDiv">jeu 3</div>
-      </section>
+          <div id="jeu3" class="GameDiv hoverstyle">
+            <img class="imgGame" src="/img/cards.png" alt="Cards" />
+            <span class="textstyle">Hidden cards</span>
+            <button class="GameBtn">Play</button>
+          </div>
+        </section>
 
-      <footer>
+        <!-- test  -->
+        <section id="MiddleSection">
+          <div id="jeu2" class="GameDiv hoverstyle">
+            <img class="imgGame" src="/img/tictactoe.png" alt="tictactoe" />
+            <span class="textstyle">Tic Tac Toe</span>
+            <button class="GameBtn">Play</button>
+          </div>
+          <div id="jeu1" class="GameDiv hoverstyle">
+            <img class="imgGame" src="/img/snake.png" alt="Snake" />
+            <span class="textstyle">Snake</span>
+            <button class="GameBtn">Play</button>
+          </div>
+
+          <div id="jeu3" class="GameDiv hoverstyle">
+            <img class="imgGame" src="/img/cards.png" alt="Cards" />
+            <span class="textstyle">Hidden cards</span>
+            <button class="GameBtn">Play</button>
+          </div>
+        </section>
+      </div>
+
+      <footer id="footer">
         <div id="left">
-          <a href="#">Contact</a>
+          <a href="#" class="FooterText">Contact</a>
         </div>
         <div id="right">
-          <button>left</button>
-          <button>right</button>
+          <button id="RightSlide" class="SkipBtn">
+            <span class="FooterText">< left</span>
+          </button>
+          <button id="LeftSlide" class="SkipBtn">
+            <span class="FooterText">right ></span>
+          </button>
         </div>
       </footer>
     </main>
+    <script>
+      const buttonRight = document.getElementById("RightSlide");
+      const buttonLeft = document.getElementById("LeftSlide");
+
+      buttonRight.onclick = function () {
+        document.getElementById("wrapper").scrollLeft += 40;
+      };
+      buttonLeft.onclick = function () {
+        document.getElementById("wrapper").scrollLeft -= 40;
+      };
+    </script>
   </body>
 </html>
