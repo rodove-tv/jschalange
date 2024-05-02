@@ -104,3 +104,10 @@ body {
   font-weight: bold;
   background-color: #26532bff;
 }
+
+
+.card{
+  width: 100px;
+  height: 100px;
+  border: solid 1px black;
+}
