@@ -16,8 +16,15 @@
   user-select: none;
 }
 
-::-webkit-scrollbar-track {
-  background: fixed var(--black);
+/* Hide scrollbar for Chrome, Safari and Opera */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+html {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 a,
@@ -174,7 +181,7 @@ nav {
 }
 
 .wrapper {
-  height: 65%;
+  height: 70%;
   width: 100%;
   display: grid;
   grid-auto-flow: column;
@@ -188,7 +195,8 @@ nav {
   display: flex;
   flex-direction: column-reverse;
   align-items: center;
-  width: 600px;
+  width: 5vh;
+  width: 100vh;
   margin: 50px;
   border-radius: 50px;
   max-width: 90%;
@@ -199,12 +207,13 @@ nav {
 .imgGame {
   transition: all 0.6s;
   position: absolute;
+  z-index: 2;
   left: 50%;
   top: 0%;
   transform: translate(-50%, -57%);
 
-  width: 20rem;
-  height: 20rem;
+  width: 20em;
+  height: 20em;
   filter: drop-shadow(10px 0px 10px rgba(0, 0, 0, 0.5));
 }
 
@@ -220,7 +229,6 @@ nav {
 }
 
 footer {
-  margin-top: 5%;
   height: 10%;
   width: 100%;
   display: flex;
