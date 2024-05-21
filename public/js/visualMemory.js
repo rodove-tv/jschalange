@@ -1,20 +1,20 @@
-// Tableau des couleurs disponibles
-let colors = ['red','darkmagenta', 'blue','aqua', 'green','chartreuse', 'yellow','black','gray', 'purple', 'orange'];
+
+let colors = ['red','darkmagenta', 'blue','aqua', 'green','chartreuse', 'yellow','black','gray', 'pink'];
 let nb=0;
-// Dupliquez chaque couleur pour garantir une paire
+
 colors = colors.flatMap(color => [color, color]);
 
-// Mélangez le tableau
 colors.sort(() => Math.random() - 0.5);
 
-// Ajouter les cartes de mémoire à la div avec l'id "wraper"
 const game = document.getElementById('wraper');
+const gameContainer = document.createElement('div');
+gameContainer.classList.add('game_visualMemory');
+game.appendChild(gameContainer);
 
-// Créer une carte de mémoire
 function createMemoryCard(color) {
     const card = document.createElement('div');
     card.classList.add('card');
-    card.style.backgroundColor = 'white';
+    card.style.backgroundColor = color;
     card.dataset.color = color;
     return card;
 }
@@ -22,61 +22,63 @@ function createMemoryCard(color) {
 for (let i = 0; i < colors.length; i++) {
     const card = createMemoryCard(colors[i]);
     card.addEventListener('click', () => handleCardClick(card));
-    game.appendChild(card);
+    gameContainer.appendChild(card);
 }
 
+gameContainer.style.display = 'none';
+const goButton = document.createElement('button');
+goButton.textContent = 'Go';
+goButton.classList.add('button_visualMemory');
+game.appendChild(goButton);
 
-// Variables pour stocker les cartes sélectionnées et les cartes correspondantes
+
+goButton.addEventListener('click', () => {
+    goButton.style.display = 'none';
+    gameContainer.style.display = 'grid';
+    window.setTimeout(hideColors, 3000);
+    function hideColors() {
+        const cards = document.querySelectorAll('.card');
+        cards.forEach(card => {
+            card.style.backgroundColor = 'white';
+        });
+    }
+});
+
 let firstCard = null;
 let secondCard = null;
 
-
-// Fonction pour gérer le clic sur une carte
 function handleCardClick(card) {
-    // Si la carte est déjà sélectionnée ou si elle est invisible, ne faites rien
     if (card.style.visibility === 'hidden' || card === firstCard || card === secondCard) {
         return;
     }
-    
-    // Vérifier si c'est la première carte sélectionnée
     if (firstCard === null) {
         firstCard = card;
-        card.style.border = '2px solid white'; // Ajouter un style pour indiquer la sélection
+        card.style.border = '2px solid white';
         firstCard.style.backgroundColor = firstCard.dataset.color;
     } else if (secondCard === null) {
         secondCard = card;
-        card.style.border = '2px solid white'; // Ajouter un style pour indiquer la sélection
+        card.style.border = '2px solid white';
         secondCard.style.backgroundColor = secondCard.dataset.color;
-        // Vérifier si les deux cartes sélectionnées ont la même couleur
         if (firstCard.dataset.color === secondCard.dataset.color) {
-            // Les cartes sont de la même couleur, les rendre invisibles
-            
             firstCard.style.visibility = 'hidden';
-            secondCard.style.visibility = 'hidden';
-            // Vérifier si toutes les cartes ont été appariées
-            
+            secondCard.style.visibility = 'hidden';         
             nb+=1;
-            //const allCards = Array.from(document.getElementsByClassName('card'));
             if (nb==colors.length/2){
-                // Toutes les cartes ont été appariées, le joueur a gagné
-                alert('Félicitations! Vous avez gagné le jeu!');
+                finishGame('win');
             }
         }else {
                 console.log('Les cartes ne correspondent pas');
-                // Les cartes ne correspondent pas, réinitialiser la sélection
                     firstCard.style.backgroundColor = 'white';
                     secondCard.style.backgroundColor = 'white';
             }
         
         firstCard.style.border = 'solid 1px black';
         secondCard.style.border = 'solid 1px black';
-        // Réinitialiser les cartes sélectionnées
         firstCard = null;
         secondCard = null;
     }
 }
 
-// Ajouter un gestionnaire d'événement pour chaque carte
 const cards = document.getElementsByClassName('card');
 for (let i = 0; i < cards.length; i++) {
     const card = cards[i];
@@ -91,5 +93,35 @@ function checkRemainingCards() {
         console.log("Toutes les cases sont colorées !");
     } else {
         console.log("Il reste des cases colorées.");
+    }
+}
+
+function finishGame(winOrLose){
+    gameContainer.style.display = 'none';
+    const finishGame = document.createElement('div');
+    finishGame.classList.add('finishGame');
+    const resetarteButton = document.createElement('button');
+    resetarteButton.textContent = 'Resetarte';
+    resetarteButton.classList.add('resetarteButton');
+    game.appendChild(finishGame);
+    const textfinish = document.createElement('p');
+    
+    finishGame.appendChild(textfinish);
+    finishGame.appendChild(resetarteButton);
+    resetarteButton.addEventListener('click', () => {
+        location.reload();
+    });
+    switch (winOrLose) {
+        case 'win':
+            console.log('GG you win !');
+            textfinish.textContent = 'GG you win !';
+            break;
+        case 'lose':
+            console.log('You lose !');
+            textfinish.textContent = 'Nooo you lose !';
+            break;
+        default:
+            console.log('Error');
+            break;
     }
 }
