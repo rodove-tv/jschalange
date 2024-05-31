@@ -1,10 +1,10 @@
 
 //initailisation
 //button start game
-const goButton = document.createElement('button');
+
 
 let colors = ['red','darkmagenta', 'blue','aqua', 'green','chartreuse', 'yellow','black','gray', 'pink'];//colors cards
-const game = document.getElementById('wraper');//game
+
 const gameContainer = document.createElement('div');//game container
 gameContainer.classList.add('game_visualMemory');
 const scoreHeader = document.getElementById('scoreHeader');//score header
@@ -29,9 +29,7 @@ actualScore.textContent = 'score :' + nb;
 timer.appendChild(time_text);
 scoreHeader.appendChild(timer);
 
-goButton.classList.add('button_start');
-goButton.textContent = 'Go';
-game.appendChild(goButton);
+
 
 //create memory card
 function initGame() {
@@ -48,23 +46,17 @@ function initGame() {
     //create cards
     for (let i = 0; i < colors.length; i++) {
         const card = createMemoryCard(colors[i]);
-        gameContainer.appendChild(card);
-        
+        gameContainer.appendChild(card); 
     }
-}
-
-
-//start game
-goButton.addEventListener('click', () => {
-    game.innerHTML = '';
-    initGame();
     game.appendChild(gameContainer);
     window.setTimeout(() => {
         hideColors();
         startTimer(30);
-       
     }, 3000);
-});
+}
+
+
+
 
 //function hide colors
 function hideColors() {
@@ -133,50 +125,6 @@ function handleCardClick(card) {
             }
         
         
-    }
-}
-
-
-
-
-
-let finish = false;
-//fonction de fin de partie 
-function finishGame(winOrLose){
-    if (finish !== true){
-        game.innerHTML = '';
-        gameContainer.innerHTML = '';
-        const finishGame = document.createElement('div');
-        finishGame.classList.add('finishGame');
-        const textfinish = document.createElement('p');
-        const resetarteButton = document.createElement('button');
-        resetarteButton.classList.add('resetarteButton');
-        resetarteButton.textContent = 'Resetarte';
-        game.appendChild(finishGame);
-        
-        
-        finishGame.appendChild(textfinish);
-        finishGame.appendChild(resetarteButton);
-        resetarteButton.addEventListener('click', () => {
-            game.innerHTML = '';
-            game.appendChild(goButton);
-        });
-        switch (winOrLose) {
-            case 'win':
-                console.log('GG you win !');
-                textfinish.textContent = 'GG you won !';
-                finish = true;
-                break;
-            case 'lose':
-                
-                
-                    console.log('You lose !');
-                    textfinish.textContent = 'Nooo you lose !';
-                    break;
-            default:
-                console.log('Error');
-                break;
-        }
     }
 }
 
