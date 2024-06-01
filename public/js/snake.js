@@ -1,10 +1,11 @@
-const gameboard = document.getElementById("game-board");
+const gameboard = document.getElementById("wraper");
+
 let food = addFood();
 let snake = [{ x: 10, y: 10 }];
-let direcrtion = "up";
+let direction = "up";
 let gameStatus;
 let gameInterval;
-let interval = 500;
+let interval = 150;
 let score = 0;
 let hightScore = 0;
 
@@ -12,21 +13,30 @@ let hightScore = 0;
 document.addEventListener("keydown", (event) => {
   switch (event.key) {
     case "ArrowUp":
-      direcrtion = "up";
+      direction = "up";
       break;
     case "ArrowDown":
-      direcrtion = "down";
+      direction = "down";
       break;
     case "ArrowLeft":
-      direcrtion = "left";
+      direction = "left";
       break;
     case "ArrowRight":
-      direcrtion = "right";
+      direction = "right";
       break;
   }
 });
 
 /* --------------------- Draw Functions --------------------- */
+
+function clearSnake() {
+  const snakeElements = document.querySelectorAll(".snake");
+  snakeElements.forEach((element) => element.remove());
+}
+function clearFood() {
+  const foodElement = document.querySelector(".food");
+  if (foodElement) foodElement.remove();
+}
 
 // draw the snake
 function drawSnake() {
@@ -48,33 +58,57 @@ function drawFood() {
 
 // main game function
 function game() {
+  clearSnake();
+  clearFood();
+  checkowncolision();
+  checkGameOver();
   drawFood();
   drawSnake();
+
   console.log("Snake.js loaded!");
 }
 
+function checkowncolision() {
+  for (let i = 1; i < snake.length; i++) {
+    if (snake[i].x === snake[0].x && snake[i].y === snake[0].y) {
+      endGame();
+    }
+  }
+}
+
+function endGame() {
+  console.log("Game Over!");
+  gameStatus = "over";
+  clearInterval(gameInterval);
+  if (score > hightScore) {
+    hightScore = score;
+    document.getElementById("hight-score").innerText = hightScore;
+  }
+  return;
+}
+
 function checkGameOver() {
-  if (snake.x < 1 || snake.x > 20 || snake.y < 1 || snake.y > 20) {
-    console.log("Game Over!");
-    gameStatus = "over";
+  head = { ...snake[0] };
+  if (head.x < 1 || head.x > 20 || head.y < 1 || head.y > 20) {
+    endGame();
   }
 }
 
 function initGame() {
+  console.log("initGame() called!");
   gameStatus = "running";
   game();
-  interval = 500;
+  interval = 150;
   gameInterval = setInterval(() => {
     moveSnake();
     game();
-    checkGameOver();
   }, interval);
 }
 
 // move the snake
 function moveSnake() {
   const head = { ...snake[0] };
-  switch (direcrtion) {
+  switch (direction) {
     case "left":
       head.x--;
       break;
@@ -89,12 +123,16 @@ function moveSnake() {
       break;
   }
   snake.unshift(head);
-  console.log(snake.unshift(head));
   if (head.x === food.x && head.y === food.y) {
     food = addFood();
     score++;
-    clearInterval();
-    interval -= 50;
+    clearInterval(gameInterval);
+    if (interval > 40) {
+      interval -= 10;
+    } else if (interval > 20) {
+      interval--;
+    }
+
     gameInterval = setInterval(() => {
       moveSnake();
       game();
@@ -127,4 +165,9 @@ function createGameElement(element, className) {
   return gameElement;
 }
 
-moveSnake();
+console.log("Snake.js loaded!");
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initGame);
+} else if (gameStatus !== "running") {
+  initGame();
+}

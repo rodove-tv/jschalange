@@ -46,12 +46,12 @@ body {
   width: 65vmin;
 }
 
-#game-board {
+#wraper {
   display: grid;
   grid-template-columns: repeat(20, 1fr);
   grid-template-rows: repeat(20, 1fr);
-  height: 100%;
-  width: 100%;
+  height: 400px;
+  width: 400px;
   background-color: var(--white);
   filter: opacity(50%);
 }
@@ -64,25 +64,23 @@ body {
 }
 
 .food {
-  background-image: url("./img/apple.png");
+  background-image: url("/img/apple.png");
   background-size: cover;
   filter: opacity(100%);
 }
 
-
 /* Styles de base pour la grille et les cellules */
-.game_TicTacToe{
+.game_TicTacToe {
   align-items: center;
   justify-content: center;
   color: #bcbdc0ff;
   background-color: rgba(57, 158, 91, 0.465);
 }
 
-
 .grid_TicTacToe {
   display: grid;
   grid-template-columns: repeat(3, 100px);
-  
+
   gap: 5px;
 }
 

@@ -39,27 +39,35 @@ body {
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 100vh;
+  padding: 40px 40px 0;
+  min-height: 100vh;
+  height: fit-content;
   background-color: var(--grey);
 }
 
 #LayoutContainer {
+  border: 2px solid #77777a;
+  position: relative;
   background-color: var(--white);
   width: 75%;
-  height: 80%;
-  padding: 10px;
+  height: 700px;
+  /* padding: 10px; */
   border-radius: 30px;
 
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: flex-end;
 
   box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
 }
 
 nav {
+  position: absolute;
+  top: 0;
   height: 20%;
   width: 100%;
+  padding: 0 25px;
 
   display: flex;
   flex-direction: row;
@@ -70,11 +78,17 @@ nav {
 .SiteName {
   height: 80px;
   aspect-ratio: 1/1;
-  margin-left: 25px;
 }
 
 .droptbtn {
-  margin-right: 25px;
+  padding: 10px;
+  background-color: var(--white);
+  border: none;
+  cursor: pointer;
+  border-radius: 10px;
+  font-size: 1.2rem;
+  font-family: "Pacifico", cursive;
+  transition: all 0.3s;
 }
 
 /*----------------  search input --------------*/
@@ -129,7 +143,8 @@ nav {
 /* ----- each game divs color ----- */
 
 #jeu1 {
-  height: 250px;
+  height: clamp(120px, 220px, 320px);
+
   background-color: rgb(54, 146, 54, 0.8);
   box-shadow: 0px 0px 10px rgb(54, 146, 54, 0.8),
     rgba(190, 190, 190, 0.35) 0px 30px 60px -12px inset,
@@ -143,7 +158,7 @@ nav {
 }
 
 #jeu2 {
-  height: 290px;
+  height: clamp(150px, 250px, 350px);
   background-color: rgb(160, 28, 28, 0.8);
   box-shadow: 0px 0px 10px rgb(160, 28, 28, 0.8),
     rgba(190, 190, 190, 0.35) 0px 30px 60px -12px inset,
@@ -157,7 +172,7 @@ nav {
 }
 
 #jeu3 {
-  height: 275px;
+  height: clamp(130px, 230px, 330px);
   background-color: rgb(39, 39, 165, 0.8);
   box-shadow: 0px 0px 10px rgb(39, 39, 165, 0.8),
     rgba(190, 190, 190, 0.35) 0px 30px 60px -12px inset,
@@ -173,15 +188,17 @@ nav {
 /* ----- game divs style ----- */
 
 #MiddleSection {
-  height: 100%;
-  width: 100%;
+  /* height: 100%;
+  width: 100%; */
+  padding-top: 60px;
   display: flex;
   align-items: flex-end;
   scroll-snap-align: start;
 }
 
 .wrapper {
-  height: 70%;
+  height: 600px;
+  margin-bottom: 4rem;
   width: 100%;
   display: grid;
   grid-auto-flow: column;
@@ -195,12 +212,9 @@ nav {
   display: flex;
   flex-direction: column-reverse;
   align-items: center;
-  width: 5vh;
-  width: 100vh;
+  width: 600px;
   margin: 50px;
   border-radius: 50px;
-  max-width: 90%;
-  max-height: 90%;
   position: relative;
 }
 
@@ -209,11 +223,11 @@ nav {
   position: absolute;
   z-index: 2;
   left: 50%;
-  top: 0%;
+  top: 0;
   transform: translate(-50%, -57%);
 
-  width: 20em;
-  height: 20em;
+  width: clamp(150px, 250px, 350px);
+  height: clamp(150px, 250px, 350px);
   filter: drop-shadow(10px 0px 10px rgba(0, 0, 0, 0.5));
 }
 
@@ -229,7 +243,10 @@ nav {
 }
 
 footer {
-  height: 10%;
+  position: absolute;
+  bottom: 0;
+  padding: 1.5rem;
+  height: fit-content;
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -253,18 +270,12 @@ footer {
 /* ----- general style ----- */
 
 #left {
-  margin-bottom: 3.2rem;
-  width: 50%;
-  padding: 2rem;
   display: flex;
   justify-content: flex-start;
   align-items: center;
 }
 
 #right {
-  margin-bottom: 3.2rem;
-  width: 50%;
-  padding: 2rem;
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -276,8 +287,9 @@ footer {
     transform: scale(1.1);
   }
   &:hover > .imgGame {
-    height: 23rem;
-    width: 23rem;
+    height: clamp(175px, 275px, 375px);
+    width: clamp(175px, 275px, 375px);
+    /* top: 15%; */
     filter: drop-shadow(15px 0px 15px rgba(0, 0, 0, 0.5));
   }
 }
