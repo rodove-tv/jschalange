@@ -1,4 +1,5 @@
 const game = document.getElementById('wraper');//game
+
 const goButton = document.createElement('button');
 goButton.classList.add('button_start');
 goButton.textContent = 'Go';

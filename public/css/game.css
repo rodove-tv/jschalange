@@ -49,6 +49,16 @@ body {
   width: 65vmin;
 }
 
+.game_snake {
+  display: grid;
+  grid-template-columns: repeat(20, 1fr);
+  grid-template-rows: repeat(20, 1fr);
+  height: 400px;
+  width: 400px;
+  background-color: var(--white);
+  filter: opacity(50%);
+}
+
 .finishGame {
   display: flex;
   width: 100%;
@@ -62,15 +72,7 @@ body {
   text-align: center;
 }
 
-#wraper {
-  display: grid;
-  grid-template-columns: repeat(20, 1fr);
-  grid-template-rows: repeat(20, 1fr);
-  height: 400px;
-  width: 400px;
-  background-color: var(--white);
-  filter: opacity(50%);
-}
+
 
 .snake {
   background-color: var(--cal-poly-green);
@@ -197,3 +199,4 @@ body {
   background-color: #f0f0f0;
   border: 1px solid black;
 }
+
