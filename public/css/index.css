@@ -16,6 +16,10 @@
   user-select: none;
 }
 
+a {
+  color: black;
+}
+
 /* Hide scrollbar for Chrome, Safari and Opera */
 ::-webkit-scrollbar {
   display: none;
@@ -240,6 +244,7 @@ nav {
   border-radius: 20px;
   padding: 10px 20px;
   font-size: 1.2rem;
+  text-decoration: none;
 }
 
 footer {
