@@ -80,6 +80,8 @@ function endGame() {
   console.log("Game Over!");
   gameStatus = "over";
   clearInterval(gameInterval);
+  document.getElementById("game-over").style.display = "block";
+  
   if (score > hightScore) {
     hightScore = score;
     document.getElementById("hight-score").innerText = hightScore;
