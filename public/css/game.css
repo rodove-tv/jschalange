@@ -151,6 +151,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 
 
@@ -185,4 +186,18 @@ body {
   background-color: white;
   filter: drop-shadow(0 0 0.75rem var(--french-gray));
   border-radius: 12px;
+}
+
+
+
+
+.game_crosswords{
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+  gap: 5px;
+  height: 100%;
+  width: 100%;
+  background-color: #f0f0f0;
+  border: 1px solid black;
 }

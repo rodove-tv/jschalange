@@ -1,12 +1,8 @@
 
 //initailisation
 //button start game
-
-
-let colors = ['red','darkmagenta', 'blue','aqua', 'green','chartreuse', 'yellow','black','gray', 'pink'];//colors cards
-
-const gameContainer = document.createElement('div');//game container
 gameContainer.classList.add('game_visualMemory');
+let colors = ['red','darkmagenta', 'blue','aqua', 'green','chartreuse', 'yellow','black','gray', 'pink'];//colors cards
 const scoreHeader = document.getElementById('scoreHeader');//score header
 const actualScore = document.getElementsByClassName('actual-score');//score
 let nb=0;//score
