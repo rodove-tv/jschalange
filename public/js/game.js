@@ -18,7 +18,7 @@ goButton.addEventListener('click', () => {
 
 //function finish game
 let finish = false;
-function finishGame(winOrLose){
+function finishGame(winOrLose = null){
   if (finish !== true){
       game.innerHTML = '';
       gameContainer.innerHTML = '';
@@ -46,11 +46,19 @@ function finishGame(winOrLose){
               finish = true;
               break;
           case 'lose':
-              
+           
               
                   console.log('You lose !');
                   textfinish.textContent = 'Nooo you lose !';
                   break;
+          case null:
+              const higthScore = document.getElementsByClassName('hight-score');
+              if (higthScore < actualScore){
+                  textfinish.textContent = 'GG you have supassed you score !';
+                  finish = true;
+              }else{
+                  textfinish.textContent = 'You lose !';
+              }
           default:
               console.log('Error');
               textfinish.textContent = 'Error !!'

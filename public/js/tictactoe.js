@@ -1,26 +1,29 @@
-const game = document.getElementById('wraper');
-game.classList.add('game_TicTacToe')
+gameContainer.classList.add('game_TicTacToe')
 
-// Créer la grille de jeu
-const grid = document.createElement('div');
-grid.classList.add('grid_TicTacToe');
-game.appendChild(grid);
+function initGame() {
+    game.appendChild(gameContainer);
 
-// Créer le message
-const message = document.createElement('div');
-message.id = 'message_TicTacToe';
-game.appendChild(message);
-let currentPlayer = 'X'; // Joueur en cours
+    // Créer la grille de jeu
+    const grid = document.createElement('div');
+    grid.classList.add('grid_TicTacToe');
+    gameContainer.appendChild(grid);
 
-// Créer les cellules de la grille
-for (let i = 0; i < 3; i++) {
-    for (let j = 0; j < 3; j++) {
-        const cell = document.createElement('div');
-        cell.classList.add('cell_TicTacToe');
-        cell.dataset.row = i;
-        cell.dataset.col = j;
-        cell.addEventListener('click', handleCellClick);
-        grid.appendChild(cell);
+    // Créer le message
+    const message = document.createElement('div');
+    message.id = 'message_TicTacToe';
+    gameContainer.appendChild(message);
+    let currentPlayer = 'X'; // Joueur en cours
+
+    // Créer les cellules de la grille
+    for (let i = 0; i < 3; i++) {
+        for (let j = 0; j < 3; j++) {
+            const cell = document.createElement('div');
+            cell.classList.add('cell_TicTacToe');
+            cell.dataset.row = i;
+            cell.dataset.col = j;
+            cell.addEventListener('click', handleCellClick);
+            grid.appendChild(cell);
+        }
     }
 }
 
