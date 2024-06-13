@@ -1,27 +1,29 @@
-
-
 let food = addFood();
 let snake = [{ x: 10, y: 10 }];
 let direction = "up";
 let gameStatus;
 let gameInterval;
 let interval = 150;
-let score = 0;
-let hightScore = 0;
+
+const gameName = "Snake";
 
 // event listener for key press
 document.addEventListener("keydown", (event) => {
   switch (event.key) {
     case "ArrowUp":
+    case "z":
       direction = "up";
       break;
     case "ArrowDown":
+    case "s":
       direction = "down";
       break;
     case "ArrowLeft":
+    case "q":
       direction = "left";
       break;
     case "ArrowRight":
+    case "d":
       direction = "right";
       break;
   }
@@ -32,6 +34,10 @@ document.addEventListener("keydown", (event) => {
 function clearSnake() {
   const snake = document.querySelectorAll(".snake");
   snake.forEach((element) => element.remove());
+  const snakeHead = document.querySelector(".snake-head");
+  if (snakeHead) snakeHead.classList.remove("snake-head");
+  const snakeSecondPart = document.querySelector(".snake-second-part");
+  if (snakeSecondPart) snakeSecondPart.classList.remove("snake-second-part");
 }
 function clearFood() {
   const foodElement = document.querySelector(".food");
@@ -40,9 +46,31 @@ function clearFood() {
 
 // draw the snake
 function drawSnake() {
-  snake.forEach((segment) => {
-    const snake = createGameElement("div", "snake");
-    setElementposition(snake, segment);
+  snake.forEach((segment, index) => {
+    let snake;
+    if (index === 0) {
+      snake = createGameElement("div", "snake-head");
+      setElementposition(snake, segment);
+    } else if (index === 1) {
+      snake = createGameElement("div", "snake-second-part");
+      setElementposition(snake, segment);
+    } else {
+      snake = createGameElement("div", "snake");
+      setElementposition(snake, segment);
+    }
+
+    if (index === 0 || index === 1) {
+      if (direction === "right") {
+        snake.style.transform = "rotate(90deg)";
+      } else if (direction === "down") {
+        snake.style.transform = "rotate(180deg)";
+      } else if (direction === "left") {
+        snake.style.transform = "rotate(270deg)";
+      } else if (direction === "up") {
+        snake.style.transform = "rotate(0deg)";
+      }
+    }
+
     gameContainer.appendChild(snake);
   });
 }
@@ -58,6 +86,7 @@ function drawFood() {
 
 // main game function
 function game_snake() {
+  score.textContent = "Actual score :  " + gameScore; // add it into each js
   clearSnake();
   clearFood();
   checkowncolision();
@@ -81,12 +110,8 @@ function endGame() {
   console.log("Game Over!");
   gameStatus = "over";
   clearInterval(gameInterval);
-  finishGame('lose');
-  
-  if (score > hightScore) {
-    hightScore = score;
-    document.getElementById("hight-score").innerText = hightScore;
-  }
+  finishGame("lose");
+
   return;
 }
 
@@ -98,10 +123,12 @@ function checkGameOver() {
 }
 
 function initGame() {
-
   /*new start*/
   food = addFood();
-  snake = [{ x: 10, y: 10 }];
+  snake = [
+    { x: 10, y: 10 },
+    { x: 10, y: 11 },
+  ];
   direction = "up";
   gameStatus;
   gameInterval;
@@ -109,8 +136,6 @@ function initGame() {
 
   gameContainer.classList.add("game_snake");
   game.appendChild(gameContainer);
-
-
 
   console.log("initGame() called!");
   gameStatus = "running";
@@ -125,6 +150,7 @@ function initGame() {
 // move the snake
 function moveSnake() {
   const head = { ...snake[0] };
+
   switch (direction) {
     case "left":
       head.x--;
@@ -140,9 +166,11 @@ function moveSnake() {
       break;
   }
   snake.unshift(head);
+
   if (head.x === food.x && head.y === food.y) {
     food = addFood();
-    score++;
+    gameScore++;
+    //Score();
     clearInterval(gameInterval);
     if (interval > 40) {
       interval -= 10;
@@ -182,4 +210,4 @@ function createGameElement(element, className) {
   return gameElement;
 }
 
-console.log("Snake.js loaded!");
+title.textContent = gameName;

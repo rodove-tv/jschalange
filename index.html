@@ -19,26 +19,26 @@
     <main id="LayoutContainer">
       <nav id="nav">
         <img src="/img/OnlineGames.png" class="SiteName" />
-        <div class="searchInputWrapper">
-          <input
-            class="searchInput"
-            type="text"
-            placeholder="focus here to search"
-          />
-          <i class="searchInputIcon fa fa-search"></i>
+        <div id="title">
+          <h3 class="searchInputWrapper">
+            <span>OnlineGames</span><span>by</span><span>ENZO & COCO</span>
+          </h3>
         </div>
+
         <div class="MenuContainer">
-          <button onclick="menuDisplay" class="droptbtn">Menu</button>
+          <button onclick="showMenu()" id="menuBtn" class="droptbtn">
+            Menu
+          </button>
           <div id="menu" class="dropdown-content">
-            <a href="#">Home</a>
-            <a href="#">About</a>
-            <a href="#">Contact</a>
-            <a href="#">Account</a>
+            <a class="menuContent" href="/game?file=bubbleSort">Bublle Sort</a>
+            <a class="menuContent" href="#">About</a>
+            <a class="menuContent" href="#">Contact</a>
+            <a class="menuContent" href="#">Account</a>
           </div>
         </div>
       </nav>
       <div class="wrapper">
-        <section id="MiddleSection">
+        <section class="MiddleSection" id="mid1">
           <div id="jeu2" class="GameDiv hoverstyle">
             <img class="imgGame" src="/img/tictactoe.png" alt="tictactoe" />
             <span class="textstyle">Tic Tac Toe</span>
@@ -57,10 +57,10 @@
           </div>
         </section>
 
-        <section id="MiddleSection">
-          <div id="jeu2" class="GameDiv hoverstyle">
+        <section class="MiddleSection" id="mid2">
+          <div id="jeu4" class="GameDiv hoverstyle">
             <img class="imgGame" src="/img/typingWords.png" alt="typingWords" />
-            <span class="textstyle">keyboard typing speed calculation</span>
+            <span class="textstyle">TypingTest</span>
             <a class="GameBtn" href="/game?file=typingWords">Play</a>
           </div>
           <div id="jeu1" class="GameDiv hoverstyle">
@@ -83,24 +83,28 @@
         </div>
         <div id="right">
           <button id="RightSlide" class="SkipBtn">
-            <span class="FooterText">< left</span>
+            <span class="FooterText" onclick="switchleft()">< left</span>
           </button>
           <button id="LeftSlide" class="SkipBtn">
-            <span class="FooterText">right ></span>
+            <span class="FooterText" onclick="switchright()">right ></span>
           </button>
         </div>
       </footer>
     </main>
     <script>
-      const buttonRight = document.getElementById("RightSlide");
-      const buttonLeft = document.getElementById("LeftSlide");
+      var section1 = document.getElementById("mid1");
+      var section2 = document.getElementById("mid2");
+      var prevButton = document.getElementById("prevButton");
+      var nextButton = document.getElementById("nextButton");
 
-      buttonRight.onclick = function () {
-        document.getElementById("wrapper").scrollLeft += 40;
-      };
-      buttonLeft.onclick = function () {
-        document.getElementById("wrapper").scrollLeft -= 40;
-      };
+      function switchleft() {
+        section1.scrollIntoView({ behavior: "smooth" });
+      }
+
+      function switchright() {
+        section2.scrollIntoView({ behavior: "smooth" });
+      }
     </script>
+    <script src="js/effects.js"></script>
   </body>
 </html>
