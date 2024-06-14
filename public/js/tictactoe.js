@@ -1,15 +1,14 @@
 gameContainer.classList.add('game_TicTacToe')
 let currentPlayer = 'X'; // Joueur en cours
+const message = document.createElement('div');
+const grid = document.createElement('div');
 function initGame() {
     game.appendChild(gameContainer);
-
-    // Créer la grille de jeu
-    const grid = document.createElement('div');
     grid.classList.add('grid_TicTacToe');
     gameContainer.appendChild(grid);
 
     // Créer le message
-    const message = document.createElement('div');
+    
     message.id = 'message_TicTacToe';
     gameContainer.appendChild(message);
     currentPlayer = 'X'; // Joueur en cours
@@ -33,7 +32,8 @@ function handleCellClick(event) {
     if (!cell.textContent) { // Vérifier si la cellule est vide
         cell.textContent = currentPlayer; // Placer le symbole du joueur
         if (checkWin()) {
-            finishGame(win);
+            grid.removeEventListener('click', handleCellClick);
+            finishGame("win");
             message.textContent = `Le joueur ${currentPlayer} a gagné !`;
             grid.removeEventListener('click', handleCellClick);
         } else if (checkDraw()) {

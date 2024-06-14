@@ -1,142 +1,83 @@
-
-//initailisation
-//button start game
-gameContainer.classList.add('game_visualMemory');
-let colors = ['red','darkmagenta', 'blue','aqua', 'green','chartreuse', 'yellow','black','gray', 'pink'];//colors cards
-const scoreHeader = document.getElementById('scoreHeader');//score header
-const actualScore = document.getElementsByClassName('actual-score');//score
-let nb=0;//score
-let secondes = 30; //time of the game
-const timer = document.createElement('div');// div timer
-timer.id = 'timer';
-const time_text = document.createElement('span');//time text
-time_text.textContent = 'Time : ' +secondes +'s';
-//cartre selection
-let firstCard = null;
-let secondCard = null;
-
-
-
-
-colors = colors.flatMap(color => [color, color]);//double colors
-colors.sort(() => Math.random() - 0.5);//random colors
-
-actualScore.textContent = 'score :' + nb;
-timer.appendChild(time_text);
-scoreHeader.appendChild(timer);
-
-
-
-//create memory card
+const cart = document.createElement('div');
+cart.classList.add('cart_memory');
+let winningCount = 1; // Initialiser avec une carte gagnante
+let correctClicks = 0; // Suivre le nombre de clics corrects
+let numberOfCards = 9;
+let gridSize = Math.ceil(Math.sqrt(numberOfCards));
 function initGame() {
-    nb=0;//score
-    firstCard = null;
-    secondCard = null;
-    function createMemoryCard(color) {
-        const card = document.createElement('div');
-        card.classList.add('card');
-        card.style.backgroundColor = color;
-        card.dataset.color = color;
-        return card;
-    }
-    //create cards
-    for (let i = 0; i < colors.length; i++) {
-        const card = createMemoryCard(colors[i]);
-        gameContainer.appendChild(card); 
-    }
+    gameContainer.innerHTML = '';
+    gameContainer.classList.add('gameContainer_memory');
     game.appendChild(gameContainer);
-    window.setTimeout(() => {
-        hideColors();
-        startTimer(30);
-    }, 3000);
-}
+    correctClicks = 0; 
+    let positions = [...Array(numberOfCards).keys()]; // Créez un tableau de 9 éléments avec des valeurs de 0 à 8
+    positions = shuffleArray(positions); 
+    let winningIndices = [];
+    for (let i = 0; i < winningCount; i++) {
+        let randomIndex;
+        do {
+            randomIndex = Math.floor(Math.random() * numberOfCards);
+        } while (winningIndices.includes(randomIndex)); // Assurez-vous que les indices gagnants sont uniques
+        winningIndices.push(randomIndex);
+    }
 
-
-
-
-//function hide colors
-function hideColors() {
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        card.style.backgroundColor = 'white';
-        card.addEventListener('click', () => handleCardClick(card));
-    });
-}
-
-//function start timer
-function startTimer(duration) {
-    secondes = duration;
-    time_text.textContent = 'Time : ' +secondes +'s';
-    const chrono = setInterval(() => {
-        secondes--;
-        time_text.textContent = 'Time : ' +secondes +'s';
-        if (secondes === 0) {
-            clearInterval(chrono);
-            finishGame('lose');
+    gridSize = Math.ceil(Math.sqrt(numberOfCards));
+    gameContainer.style.gridTemplateColumns = `repeat(${gridSize}, 1fr)`;
+    gameContainer.style.gridTemplateRows = `repeat(${gridSize}, 1fr)`;
+    for (let i = 0; i < numberOfCards; i++) {
+        // Calculer la taille de la grille
+        const card = cart.cloneNode(true);
+        card.dataset.cardId = positions[i];
+        card.style.backgroundColor = 'grey';
+        card.addEventListener('click', handleCardClick);
+        gameContainer.appendChild(card);
+        if (winningIndices.includes(positions[i])) { // Utiliser positions[i] pour vérifier si c'est une carte gagnante
+            card.dataset.winning = "true";
         }
-    }, 1000);
+    }
+
+    document.querySelectorAll('[data-winning="true"]').forEach(card => {
+        card.style.backgroundColor = 'white';
+    });
+    setTimeout(() => {
+        document.querySelectorAll('.cart_memory').forEach(card => card.style.backgroundColor = 'grey');
+    }, 1500);
+
+    canClick = true;
 }
 
-
-
-
-
-//function manage color egal or not
-function handleCardClick(card) {
-    if (card.style.visibility === 'hidden' || card === firstCard || card === secondCard) {
-        return;
-    }
-    if (firstCard === null) {
-        firstCard = card;
-        card.style.border = '2px solid white';
-        firstCard.style.backgroundColor = firstCard.dataset.color;
-    } else if (secondCard === null) {
-        secondCard = card;
-        secondCard.style.border = '2px solid white';
-        secondCard.style.backgroundColor = secondCard.dataset.color;
-        if (firstCard.dataset.color === secondCard.dataset.color) {
-            window.setTimeout(function() {
-                firstCard.style.visibility = 'hidden';
-                secondCard.style.visibility = 'hidden';  
-                firstCard = null;
-                secondCard = null; 
-                nb+=1;
-                actualScore.textContent = 'score :' + nb;
-                if (nb == colors.length / 2) {
-                    finishGame('win');
-                }
-            }, 500);        
+function handleCardClick(event) {
+    if (!canClick) return;
+    const card = event.target.closest('.cart_memory');
+    if (card.dataset.winning) {
+        correctClicks++;
+        card.style.backgroundColor = 'green'; // Optionnel : marquer visuellement les clics corrects
+        if (correctClicks === winningCount) {
             
-        }else {
-            window.setTimeout(function() {
-                console.log('carttes not match');
-                    firstCard.style.backgroundColor = 'white';
-                    secondCard.style.backgroundColor = 'white';
-                    firstCard.style.border = 'solid 1px black';
-                    secondCard.style.border = 'solid 1px black';
-                    firstCard = null;
-                    secondCard = null;
-                }, 500);
-
+            if (!(winningCount < document.querySelectorAll('.cart_memory').length/ 2)) {
+                numberOfCards+= gridSize*2+1
             }
-        
-        
+            winningCount++;
+            setTimeout(() => {
+                initGame(); // Commencer un nouveau jeu avec plus de cartes gagnantes
+            }, 500);
+        }
+    } else {
+        card.style.backgroundColor = 'red';
+        if (document.querySelectorAll('.cart_memory[style="background-color: red;"]').length >= 3) {
+            numberOfCards = 9;
+            winningCount = 1; // Initialiser avec une carte gagnante
+            finishGame('lose');
+            // Code pour terminer le jeu ou effectuer une action spécifique en cas de défaite
+        }
+        // Optionnel : Réinitialiser le jeu ou marquer la carte incorrecte
     }
 }
 
-function scorer(){
-    const score = document.createElement('div');
-    score.classList.add('score');
-    game.appendChild(score);
-    const textScore = document.createElement('p');
-    textScore.textContent = 'Score : ';
-    const scoreValue = document.createElement('span');
-    scoreValue.textContent = '0';
-    score.appendChild(textScore);
-    score.appendChild(scoreValue);
-    return scoreValue;
+// Assurez-vous d'inclure la fonction shuffleArray si elle n'est pas déjà définie
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
 }
-
-
-
-//ce qu'il reste a faire gere les score
