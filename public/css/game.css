@@ -231,3 +231,44 @@ body {
   background-color: #f0f0f0;
   border: 1px solid black;
 }
+
+
+
+
+.game_typingWords{
+  height: 100%;
+  width: 100%;
+  background-color: #f0f0f0;
+  border: 1px solid black;
+}
+.letter_typingWords{
+  font-size: 30px;
+  min-width: 50px;
+  background-color: #26532b;
+  color: white;
+  border: 1px solid black;
+  margin: 0.5px;
+  cursor: pointer;
+}
+
+
+
+.gameContainer_memory {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+  gap: 5px;
+  height: 100%;
+  width: 100%;
+  background-color: #f0f0f000;
+  border: 1px solid black;
+}
+
+.card_memory {
+  background-color: #26532b;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}

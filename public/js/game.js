@@ -29,7 +29,7 @@ goButton.addEventListener("click", () => {
 
 //function finish game
 let finish = false;
-function finishGame(winOrLose = null) {
+function finishGame(winOrLose = null,messages = null) {
   if (gameScore > gamehighScore) {
     gamehighScore = gameScore;
     highScore.innerHTML = "High score :  " + gamehighScore;
@@ -57,30 +57,33 @@ function finishGame(winOrLose = null) {
       game.innerHTML = "";
       game.appendChild(goButton);
     });
-
-    switch (winOrLose) {
-      case "win":
-        console.log("GG you won !");
-        textfinish.textContent = "GG you won !";
-        finish = true;
-        break;
-      case "lose":
-        console.log("You lose !");
-        textfinish.textContent = "Nooo you lose !";
-        break;
-      case null:
-        const higthScore = document.getElementsByClassName("hight-Score");
-        if (higthScore < actualScore) {
-          textfinish.textContent = "GG you have supassed you Score !";
-          finish = true;
-        } else {
-          textfinish.textContent = "You lose !";
-        }
-      default:
-        console.log("Error");
-        textfinish.textContent = "Error !!";
-        break;
-    }
+      switch (winOrLose) {
+          case 'win':
+              console.log('GG you won !');
+              textfinish.textContent = 'GG you won !';
+              
+              finish = true;
+              break;
+          case 'lose':
+           
+              
+                  console.log('You lose !');
+                  textfinish.textContent = 'Nooo you lose !';
+                  break;
+          case 'hightScore':
+              const higthScore = document.getElementsByClassName('hight-score');
+              if (higthScore < actualScore){
+                  textfinish.textContent = 'GG you have supassed you score !';
+                  finish = true;
+              }else{
+                  textfinish.textContent = 'You dont exceed you score !';
+              }
+          default:
+              console.log('Error');
+              textfinish.textContent = 'Error !!'
+              break;
+      }
+      messages ? textfinish.textContent += messages : null;
   }
 }
 

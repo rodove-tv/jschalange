@@ -1,20 +1,18 @@
 const gameName = "TicTacToe";
-
-gameContainer.classList.add("game_TicTacToe");
-let currentPlayer = "X"; // Joueur en cours
+gameContainer.classList.add('game_TicTacToe')
+let currentPlayer = 'X'; // Joueur en cours
+const message = document.createElement('div');
+const grid = document.createElement('div');
 function initGame() {
-  game.appendChild(gameContainer);
+    game.appendChild(gameContainer);
+    grid.classList.add('grid_TicTacToe');
+    gameContainer.appendChild(grid);
 
-  // Créer la grille de jeu
-  const grid = document.createElement("div");
-  grid.classList.add("grid_TicTacToe");
-  gameContainer.appendChild(grid);
-
-  // Créer le message
-  const message = document.createElement("div");
-  message.id = "message_TicTacToe";
-  gameContainer.appendChild(message);
-  currentPlayer = "X"; // Joueur en cours
+    // Créer le message
+    
+    message.id = 'message_TicTacToe';
+    gameContainer.appendChild(message);
+    currentPlayer = 'X'; // Joueur en cours
 
   // Créer les cellules de la grille
   for (let i = 0; i < 3; i++) {
@@ -32,17 +30,17 @@ function initGame() {
 // Gérer le clic sur une cellule
 function handleCellClick(event) {
   const cell = event.target;
-  if (!cell.textContent) {
-    // Vérifier si la cellule est vide
+  if (!cell.textContent) { // Vérifier si la cellule est vide
     cell.textContent = currentPlayer; // Placer le symbole du joueur
     if (checkWin()) {
-      finishGame(win);
+      grid.removeEventListener('click', handleCellClick);
+      finishGame("win");
       message.textContent = `Le joueur ${currentPlayer} a gagné !`;
-      grid.removeEventListener("click", handleCellClick);
+      grid.removeEventListener('click', handleCellClick);
     } else if (checkDraw()) {
       message.textContent = "Match nul !";
     } else {
-      currentPlayer = currentPlayer === "X" ? "O" : "X"; // Changer de joueur
+      currentPlayer = currentPlayer === 'X' ? 'O' : 'X'; // Changer de joueur
       message.textContent = `C'est le tour du joueur ${currentPlayer}`;
     }
   }
