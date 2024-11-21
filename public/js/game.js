@@ -5,13 +5,6 @@ const highScore = document.getElementById("high-score");
 let gameScore = 0;
 let gamehighScore = 0;
 
-const body = document.querySelector("body");
-const backToMenu = document.createElement("a");
-backToMenu.classList.add("GameBtn");
-backToMenu.textContent = "Back to menu";
-backToMenu.href = "/";
-body.appendChild(backToMenu);
-
 const goButton = document.createElement("button");
 goButton.classList.add("button_start");
 goButton.textContent = "Go";
@@ -29,7 +22,7 @@ goButton.addEventListener("click", () => {
 
 //function finish game
 let finish = false;
-function finishGame(winOrLose = null,messages = null) {
+function finishGame(winOrLose = null, messages = null) {
   if (gameScore > gamehighScore) {
     gamehighScore = gameScore;
     highScore.innerHTML = "High score :  " + gamehighScore;
@@ -57,33 +50,31 @@ function finishGame(winOrLose = null,messages = null) {
       game.innerHTML = "";
       game.appendChild(goButton);
     });
-      switch (winOrLose) {
-          case 'win':
-              console.log('GG you won !');
-              textfinish.textContent = 'GG you won !';
-              
-              finish = true;
-              break;
-          case 'lose':
-           
-              
-                  console.log('You lose !');
-                  textfinish.textContent = 'Nooo you lose !';
-                  break;
-          case 'hightScore':
-              const higthScore = document.getElementsByClassName('hight-score');
-              if (higthScore < actualScore){
-                  textfinish.textContent = 'GG you have supassed you score !';
-                  finish = true;
-              }else{
-                  textfinish.textContent = 'You dont exceed you score !';
-              }
-          default:
-              console.log('Error');
-              textfinish.textContent = 'Error !!'
-              break;
-      }
-      messages ? textfinish.textContent += messages : null;
+    switch (winOrLose) {
+      case "win":
+        console.log("GG you won !");
+        textfinish.textContent = "GG you won !";
+
+        finish = true;
+        break;
+      case "lose":
+        console.log("You lose !");
+        textfinish.textContent = "Nooo you lose !";
+        break;
+      case "hightScore":
+        const higthScore = document.getElementsByClassName("hight-score");
+        if (higthScore < actualScore) {
+          textfinish.textContent = "GG you have supassed you score !";
+          finish = true;
+        } else {
+          textfinish.textContent = "You dont exceed you score !";
+        }
+      default:
+        console.log("Error");
+        textfinish.textContent = "Error !!";
+        break;
+    }
+    messages ? (textfinish.textContent += messages) : null;
   }
 }
 
