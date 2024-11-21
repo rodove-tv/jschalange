@@ -31,10 +31,16 @@ Enzo - Discord : Enzo - enzo.martinez@ynov.com
 ## Pictures of final version
 
 Page
-![html page](imgReadme/web.png)
+![html page](ReadmeImgs/landingPage.png)
 
-Api
-![API json](imgReadme/API.png)
+Page with opened menu
+![html page](ReadmeImgs/landingPageMenu.png)
 
-Imdb
-![IMDB adventure page](imgReadme/IMDB.png)
+Other games
+![html page](ReadmeImgs/landingPageNextGames.png)
+
+Snake game
+![html page](ReadmeImgs/snakeGame.png)
+
+Hidden cards game
+![html page](ReadmeImgs/hiddenCards.png)
